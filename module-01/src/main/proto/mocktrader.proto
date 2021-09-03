@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.user.mocktrader";//
+option java_outer_classname = "Proto";
+option objc_class_prefix = "HLW";
+
+
+service mocktraderService {
+  rpc Buy(BuyReq) returns (BuyRes) {}
+  rpc Sell(SellReq) returns (SellRes) {}
+  rpc Query(QueryReq) returns (QueryRes) {}
+}
+
+message BuyReq {
+  int64 uid = 1;
+  int32 type = 2;
+  string code = 3;
+  int64 num = 4;
+  int64 price = 5;//-1：现价买入；>0:挂单；
+}
+
+message BuyRes {
+  int64 total = 1;
+  int64 num = 2;
+}
+
+message SellReq {
+  int64 uid = 1;
+  int32 type = 2;
+  string code = 3;
+  int64 num = 4;
+  int64 price = 5;//-1：现价买入；>0:挂单；
+}
+
+message SellRes {
+  int64 total = 1;
+  int64 num = 2;
+}
+
+message QueryReq {
+  int64 uid = 1;
+}
+
+message QueryRes {
+  repeated AssetData assets = 1;
+
+}
+
+message AssetData {
+  // 资产类型 -1人民币 -2港币 -3美元 1上证 2深证 3美股(包括道琼斯和纳斯达克) 4港股
+  int32 type = 1;
+  string code = 2;
+  int64 num = 3;
+}

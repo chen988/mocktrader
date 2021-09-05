@@ -5,42 +5,42 @@
 
 <mapper namespace="com.kuang.mapper.UserMapper">
     <select id="selectUser" resultType="user">
-        select * from mocktrander.user where uid = #{uid};
+        select * from mocktrader.user where uid = #{uid};
     </select>
 
    <select id="selectUserBalance" resultType="int">
-        select balance from mocktrander.user where uid=#{uid};
+        select balance from mocktrader.user where uid=#{uid};
     </select>
 
     <update id="updateUserBalance" parameterType="user">
-        update mocktrander.user
+        update mocktrader.user
         set balance = #{arg1}
         where uid = #{arg0};
     </update>
 
     <select id="selectAsset" resultType="asset">
-        select * from mocktrander.asset
+        select * from mocktrader.asset
         where uid=#{arg0} and type=#{arg1} ;
     </select>
 
     <insert id="insertAsset">
-        insert into mocktrander.asset(uid,type,code,num)
+        insert into mocktrader.asset(uid,type,code,num)
         values (#{arg0},#{arg1},#{arg2},#{arg3});
     </insert>
 
     <update id="updateAsset" parameterType="Asset">
-        update mocktrander.asset
+        update mocktrader.asset
         set num = #{arg3}
         where uid = #{arg0} and type = #{arg1} and code = #{arg2};
     </update>
 
     <select id="selectAssetNum" parameterType="asset" resultType="int">
-        select num from mocktrander.asset
+        select num from mocktrader.asset
         where uid = #{arg0} and type = #{arg1} and code = #{arg2};
     </select>
 
     <select id="selectAssetData" resultType="asset">
-        select asset.type as type,asset.code as code,asset.num as num from mocktrander.asset where uid = #{arg0};
+        select asset.type as type,asset.code as code,asset.num as num from mocktrader.asset where uid = #{arg0};
     </select>
 
 

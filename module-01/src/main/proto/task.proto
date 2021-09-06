@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.user.task";//
+option java_outer_classname = "Proto";
+option objc_class_prefix = "HLW";
+
+
+
+service Task {
+  // 创建价格任务
+  rpc CreatePriceTask(CreatePriceTaskReq) returns (CreatePriceTaskRes) {}
+}
+
+// 在这里注册需要任务的服务，调用创建任务服务接口，然后读取redis的订阅，以NOT_USED服务为例，频道为task_0
+enum SourceService {
+  NOT_USED = 0;
+  ORDER = 1;
+  MOCKE_TRANDER = 2;
+}
+
+enum PriceCondition {
+  NOT_USE = 0;
+  LESS = 1;
+  GREATER = 2;
+}
+
+message CreatePriceTaskReq {
+  SourceService source = 1;
+  repeated PriceTask tasks = 2;
+}
+
+message PriceTask {
+  // 资产类型 1上证 2深证 3美股(包括道琼斯和纳斯达克) 4港股
+  int32 asset_type = 1;
+  // 资产代号
+  string asset_code = 2;
+  PriceCondition condition = 3;
+  int64 price = 4;
+  int64 start_time = 5;
+  string message = 6;
+  int64 Uid = 7;
+}
+
+message CreatePriceTaskRes {
+
+}

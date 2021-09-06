@@ -110,6 +110,8 @@ public class TransactionClient {
 
 //            int uid = 1;
 //            client.query(uid);
+
+
         } catch (Exception e){
             e.printStackTrace();
         } finally {

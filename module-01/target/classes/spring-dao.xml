@@ -7,9 +7,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/tx
-        https://www.springframework.org/schema/tx/spring-tx.xsd">
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd"-->
 
     <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -36,11 +36,11 @@
     </bean>
 
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="datasource"/>
-    </bean>
+    </bean>-->
 
-    <tx:advice id="txAdivice" transaction-manager="transactionManager">
+<!--    <tx:advice id="txAdivice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="buy" propagation="REQUIRED"/>
             <tx:method name="sell" propagation="REQUIRED"/>
@@ -50,6 +50,6 @@
     <aop:config>
         <aop:pointcut id="txPointCut" expression="execution(* com.kuang.mapper.*.*(..))"/>
         <aop:advisor advice-ref="txAdivice" pointcut-ref="txPointCut"/>
-    </aop:config>
+    </aop:config>-->
 
 </beans>

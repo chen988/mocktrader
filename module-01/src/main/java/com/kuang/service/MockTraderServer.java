@@ -85,6 +85,7 @@ public class MockTraderServer {
 
         @Override
         public void query(QueryReq req,StreamObserver<QueryRes> resStreamObserver) {
+            logger.info("-"+req.getUid()+"-" +req.toString());
             QueryRes res = new Trader().query(req);
 
             resStreamObserver.onNext(res);

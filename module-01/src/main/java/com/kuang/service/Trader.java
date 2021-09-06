@@ -7,14 +7,12 @@ import io.grpc.user.mocktrader.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Trader {
-    public static void main(String[] args) {
-    }
+   public static final Logger logger = Logger.getLogger(MockTraderServer.class.getName());
 
     public long getPriceByTypeCode(int type,String code){
         Jedis jedis = new Jedis("39.107.123.202",6379);
@@ -97,11 +95,12 @@ public class Trader {
 
 
     public QueryRes query(QueryReq req) {
-        long uid = req.getUid();
 
+        long uid = req.getUid();
+        logger.info("参数"+uid +"-start load spring context-");
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
         UserMapper userMapper = context.getBean("userMapper", UserMapper.class);
-
+        logger.info("-load spring context finished-" +userMapper.toString());
         List<Asset> assetData = userMapper.selectAssetData(uid);
         List<AssetData> list = new ArrayList<AssetData>();
         if(assetData != null) {

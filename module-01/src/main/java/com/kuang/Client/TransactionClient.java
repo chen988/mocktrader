@@ -77,6 +77,7 @@ public class TransactionClient {
             res = blockingStub.query(req);
             System.out.println(res);
         } catch (StatusRuntimeException e) {
+            e.printStackTrace();
             logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
             return;
         }
@@ -89,25 +90,28 @@ public class TransactionClient {
      * greeting.
      */
     public static void main(String[] args) throws Exception {
-        TransactionClient client = new TransactionClient("localhost", 10002);
+        //TransactionClient client = new TransactionClient("localhost", 10002);
+        TransactionClient client = new TransactionClient("39.107.123.202", 10002);
         try {
             /* Access a service running on the local machine on port 50051 */
 
-//            int uid = 1;
-//            String code = "513050";
-//            int num = 10;
-//            int type = 1;
-//            System.out.println("===========");
-//            client.buy(uid,type,code,num);
-
             int uid = 1;
             String code = "513050";
-            long num = 10;
+            int num = 10;
             int type = 1;
-            client.sell(uid,type,code,num);
+            System.out.println("===========");
+            client.buy(uid,type,code,num);
 
-//            int uid = 2;
+//            int uid = 1;
+//            String code = "513050";
+//            long num = 10;
+//            int type = 1;
+//            client.sell(uid,type,code,num);
+
+//            int uid = 1;
 //            client.query(uid);
+        } catch (Exception e){
+            e.printStackTrace();
         } finally {
             client.shutdown();
         }
